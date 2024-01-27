@@ -8,6 +8,6 @@
     "rootDir": "./",
     "strict": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "configs/sequelize.ts", "App.ts"],
   "exclude": ["node_modules"]
 }

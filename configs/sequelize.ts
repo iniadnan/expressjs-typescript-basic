@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 import Users from "../models/Users.model";
 
-const sequelize = new Sequelize({
+const SEQUELIZE = new Sequelize({
   dialect: "mysql", // Change this to your database dialect (e.g., postgres, sqlite)
   database: "express_db_blog",
   username: "root",
@@ -14,4 +14,4 @@ const sequelize = new Sequelize({
   },
 });
 
-export default sequelize;
+export default SEQUELIZE;
