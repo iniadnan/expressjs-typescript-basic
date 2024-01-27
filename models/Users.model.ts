@@ -1,4 +1,4 @@
-import { Model, DataType, Table, Column, Default } from "sequelize-typescript";
+import { Model, DataType, Table, Column } from "sequelize-typescript";
 import { generateRandomStringNumber } from "../helpers/randomString";
 
 @Table({ tableName: "users" })
