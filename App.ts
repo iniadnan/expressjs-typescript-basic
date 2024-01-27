@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import UsersRoute from "./routes/Users.route";
 
 const APP = express();
@@ -6,6 +6,9 @@ const PORT = 3000;
 
 // MIDDLEWARE EXPRESS JSON
 APP.use(express.json());
+
+// MIDDLEWARE BODY PARSER
+APP.use(express.urlencoded({ extended: false }));
 
 // API USERS
 APP.use("/api/users", UsersRoute);

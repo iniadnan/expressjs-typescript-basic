@@ -1,10 +1,11 @@
 import express, { Request, Response } from "express";
-import { getAllUser } from "../models/Users.model";
+import { getAllUser, insertUser } from "../models/Users.model";
+import { IShowUsers } from "../types";
 
 // GET ALL USER
 export const showAllUser = (req: Request, res: Response) => {
   try {
-    getAllUser((err: any, results: any) => {
+    getAllUser((err: null, results: any) => {
       if (err) {
         res.send(err);
       } else {
@@ -28,7 +29,19 @@ export const showSingleUser = (req: Request, res: Response) => {
 // CREATE NEW USERS
 export const createUser = (req: Request, res: Response) => {
   try {
-    return res.status(200).send("CREATE NEW USERS");
+    const data = {
+      name: req.body.name.trim(),
+      email: req.body.email.trim().toLowerCase(),
+      password: req.body.password.trim(),
+    };
+
+    insertUser(data, (err: any, results: any) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.status(200).send('Data Successfully Insert!');
+      }
+    });
   } catch (Error) {
     console.log(Error);
   }

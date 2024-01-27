@@ -1,4 +1,5 @@
 import DBConnection from "../configs/Connnection";
+import { generateRandomStringNumber } from "../helpers/randomString";
 
 // GET ALL USERS
 export const getAllUser = (result: any) => {
@@ -20,11 +21,11 @@ export const getAllUser = (result: any) => {
 };
 
 // CREATE NEW USER
-export const insertUser = (data, result) => {
+export const insertUser = (data: any, result: any) => {
   try {
     DBConnection.query(
-      "INSERT INTO users (id, email, username, password) VALUES (?, ?, ?, ?)",
-      [data.id, data.email, data.username, hashPassword],
+      "INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)",
+      [generateRandomStringNumber(60), data.name, data.email, data.password],
       (err, results) => {
         if (err) {
           console.log(err);
