@@ -1,28 +1,40 @@
-import { Table, Model, Column, DataType } from "sequelize-typescript";
+import DBConnection from "../configs/Connnection";
 
-@Table({
-  timestamps: false,
-  tableName: "dogs",
-})
-class Users extends Model {
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  name!: string;
+// GET ALL USERS
+export const getAllUser = (result: any) => {
+  try {
+    DBConnection.query(
+      "SELECT * FROM users ORDER BY created_at",
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          result(err, null);
+        } else {
+          result(null, results);
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  breed!: string;
-
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: true,
-    defaultValue: true,
-  })
-  isGoodBoy!: boolean;
-}
-
-export default Users
+// CREATE NEW USER
+export const insertUser = (data, result) => {
+  try {
+    DBConnection.query(
+      "INSERT INTO users (id, email, username, password) VALUES (?, ?, ?, ?)",
+      [data.id, data.email, data.username, hashPassword],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+          result(err, null);
+        } else {
+          result(null, results);
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};

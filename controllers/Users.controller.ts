@@ -1,9 +1,16 @@
 import express, { Request, Response } from "express";
+import { getAllUser } from "../models/Users.model";
 
 // GET ALL USER
 export const showAllUser = (req: Request, res: Response) => {
   try {
-    return res.status(200).send("GET ALL USER");
+    getAllUser((err: any, results: any) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(results);
+      }
+    });
   } catch (Error) {
     console.log(Error);
   }
