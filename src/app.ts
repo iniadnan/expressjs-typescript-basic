@@ -1,9 +1,10 @@
 import express, { Request, Response } from "express";
 // import sequelize from "./sequelize";
 // import Users from "../models/Users.model";
+import UsersRoute from "../routes/Users.route"
 
-const app = express();
-const port = 3000;
+const APP = express();
+const PORT = 3000;
 
 // Sync the models with the database
 // sequelize.sync();
@@ -22,6 +23,9 @@ const port = 3000;
 //   res.json(users);
 // });
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+// API USERS
+APP.use("/api/users", UsersRoute);
+
+APP.listen(PORT, () => {
+  console.log(`Server is running at http://localhost:${PORT}`);
 });
