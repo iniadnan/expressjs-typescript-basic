@@ -1,7 +1,5 @@
 import express, { Request, Response } from "express";
-// import SEQUELIZE from "../configs/sequelize";
-// import sequelize from "./sequelize";
-// import Users from "../models/Users.model";
+import SEQUELIZE from "./configs/sequelize";
 import UsersRoute from "./routes/Users.route";
 
 const APP = express();
@@ -32,7 +30,7 @@ APP.use("/api/users", UsersRoute);
 
 const start = async (): Promise<void> => {
   try {
-    // await SEQUELIZE.sync();
+    await SEQUELIZE.sync();
     APP.listen(3000, () => {
       console.log(`Server is running at http://localhost:${PORT}`);
     });

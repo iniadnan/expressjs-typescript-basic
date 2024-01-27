@@ -1,24 +1,28 @@
-import { Model, DataType, Table, Column } from "sequelize-typescript";
-import { generateRandomStringNumber } from "../helpers/randomString";
+import { Table, Model, Column, DataType } from "sequelize-typescript";
 
-@Table({ tableName: "users" })
+@Table({
+  timestamps: false,
+  tableName: "dogs",
+})
 class Users extends Model {
   @Column({
-    type: DataType.UUID,
+    type: DataType.STRING,
     allowNull: false,
-    primaryKey: true,
-    defaultValue: generateRandomStringNumber(60),
   })
-  id!: string;
-
-  @Column({ type: DataType.STRING, allowNull: false })
   name!: string;
 
-  @Column({ type: DataType.STRING, allowNull: false })
-  email!: string;
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  breed!: string;
 
-  @Column({ type: DataType.STRING, allowNull: false })
-  password!: string;
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: true,
+    defaultValue: true,
+  })
+  isGoodBoy!: boolean;
 }
 
-export default Users;
+export default Users
