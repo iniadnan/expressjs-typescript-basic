@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize-typescript";
+import Users from "../models/Users.model";
 
 const sequelize = new Sequelize({
   dialect: "mysql", // Change this to your database dialect (e.g., postgres, sqlite)
@@ -7,7 +8,7 @@ const sequelize = new Sequelize({
   password: "",
   host: "localhost",
   port: 3306, // Change this to your database port
-  models: [__dirname + "/models"], // Path to your models directory
+  models: [Users], // Path to your models directory
   define: {
     timestamps: true,
   },
