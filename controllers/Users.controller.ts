@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import {
   getAllUser,
   getSingleUser,
@@ -6,16 +6,15 @@ import {
   updateUserById,
   deleteSingleUser,
 } from "../models/Users.model";
-import { IShowUsers } from "../types";
 
 // GET ALL USER
 export const showAllUser = (req: Request, res: Response) => {
   try {
-    getAllUser((err: null, results: any) => {
+    getAllUser((err: any, results: any) => {
       if (err) {
-        res.send(err);
+        res.status(400).send(err);
       } else {
-        res.json(results);
+        res.status(200).json(results);
       }
     });
   } catch (Error) {

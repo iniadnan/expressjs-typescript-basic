@@ -5,10 +5,9 @@ import { generateRandomStringNumber } from "../helpers/randomString";
 export const getAllUser = (result: any) => {
   try {
     DBConnection.query(
-      "SELECT email, name, created_at FROM users ORDER BY created_at",
+      "SELECT email, name, created_at FROM users ORDER BY created_at DESC",
       (err, results) => {
         if (err) {
-          console.log(err);
           result(err, null);
         } else {
           result(null, results);

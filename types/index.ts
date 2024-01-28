@@ -3,3 +3,8 @@ export interface IShowUsers {
   email: string;
   created_at: string;
 }
+
+export interface IResult {
+  error: object;
+  result: [];
+}
