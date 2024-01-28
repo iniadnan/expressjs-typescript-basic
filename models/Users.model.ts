@@ -46,7 +46,6 @@ export const insertUser = (data: any, result: any) => {
       [generateRandomStringNumber(16), data.name, data.email, data.password],
       (err, results) => {
         if (err) {
-          console.log(err);
           result(err, null);
         } else {
           result(null, results);

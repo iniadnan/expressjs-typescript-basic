@@ -12,9 +12,9 @@ export const showAllUser = (req: Request, res: Response) => {
   try {
     getAllUser((err: any, results: any) => {
       if (err) {
-        res.status(400).send(err);
+        return res.status(400).send(err);
       } else {
-        res.status(200).json(results);
+        return res.status(200).json(results);
       }
     });
   } catch (Error) {
@@ -28,9 +28,9 @@ export const showSingleUser = (req: Request, res: Response) => {
     const email = req.params.email.trim().toLowerCase();
     getSingleUser(email, (err: any, results: any) => {
       if (err) {
-        res.send(err);
+        return res.status(400).send(err);
       } else {
-        return res.status(200).json(results);
+        return res.status(200).json(results[0]);
       }
     });
   } catch (Error) {
@@ -41,17 +41,17 @@ export const showSingleUser = (req: Request, res: Response) => {
 // CREATE NEW USERS
 export const createUser = (req: Request, res: Response) => {
   try {
-    const data = {
+    const userData = {
       name: req.body.name.trim(),
       email: req.body.email.trim().toLowerCase(),
       password: req.body.password.trim(),
     };
 
-    insertUser(data, (err: any, results: any) => {
+    insertUser(userData, (err: any, results: any) => {
       if (err) {
-        res.send(err);
+        return res.status(400).send(err);
       } else {
-        res.status(200).send("Data Successfully Insert!");
+        return res.status(200).send("Data Successfully Insert!");
       }
     });
   } catch (Error) {
