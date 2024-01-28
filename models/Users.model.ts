@@ -60,7 +60,17 @@ export const insertUser = (data: any, result: any) => {
 // UPDATE USER
 export const updateUserById = (data: any, result: any) => {
   try {
-    console.log("updated!");
+    DBConnection.query(
+      "UPDATE users SET name = ?, email = ? WHERE id = ?",
+      [data.name, data.email, data.id],
+      (err, results) => {
+        if (err) {
+          result(err, null);
+        } else {
+          result(null, results);
+        }
+      }
+    );
   } catch (error) {
     console.log(error);
   }

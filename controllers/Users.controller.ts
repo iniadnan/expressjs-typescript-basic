@@ -46,7 +46,6 @@ export const createUser = (req: Request, res: Response) => {
       email: req.body.email.trim().toLowerCase(),
       password: req.body.password.trim(),
     };
-
     insertUser(userData, (err: any, results: any) => {
       if (err) {
         return res.status(400).send(err);
@@ -62,11 +61,16 @@ export const createUser = (req: Request, res: Response) => {
 // UPDATE USER
 export const updateUser = (req: Request, res: Response) => {
   try {
-    updateUserById("hello", (err: any, results: any) => {
+    const userData = {
+      id: req.body.id.trim(),
+      name: req.body.name.trim(),
+      email: req.body.email.trim().toLowerCase(),
+    };
+    updateUserById(userData, (err: any, results: any) => {
       if (err) {
-        res.send(err);
+        return res.status(400).send(err);
       } else {
-        res.status(200).send("OK");
+        return res.status(200).send("Data Successfully Updated!");
       }
     });
   } catch (Error) {
