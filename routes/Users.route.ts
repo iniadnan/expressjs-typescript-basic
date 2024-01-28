@@ -15,7 +15,7 @@ const UsersRoute = express.Router();
 UsersRoute.get("/all", showAllUser);
 
 // GET: SINGLE USER
-UsersRoute.get("/user/:id", showSingleUser);
+UsersRoute.get("/user/:email", showSingleUser);
 
 // CREATE: CREATE NEW USER
 UsersRoute.post("/create", createUser);

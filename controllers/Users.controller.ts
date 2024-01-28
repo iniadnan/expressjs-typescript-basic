@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { getAllUser, insertUser } from "../models/Users.model";
+import { getAllUser, getSingleUser, insertUser } from "../models/Users.model";
 import { IShowUsers } from "../types";
 
 // GET ALL USER
@@ -20,7 +20,13 @@ export const showAllUser = (req: Request, res: Response) => {
 // GET SINGLE USER
 export const showSingleUser = (req: Request, res: Response) => {
   try {
-    return res.status(200).send("GET SINGLE USER");
+    getSingleUser(req.params.email, (err: any, results: any) => {
+      if (err) {
+        res.send(err);
+      } else {
+        return res.status(200).json(results);
+      }
+    });
   } catch (Error) {
     console.log(Error);
   }
@@ -39,7 +45,7 @@ export const createUser = (req: Request, res: Response) => {
       if (err) {
         res.send(err);
       } else {
-        res.status(200).send('Data Successfully Insert!');
+        res.status(200).send("Data Successfully Insert!");
       }
     });
   } catch (Error) {
