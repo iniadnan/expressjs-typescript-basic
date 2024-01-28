@@ -58,3 +58,37 @@ export const insertUser = (data: any, result: any) => {
     console.log(error);
   }
 };
+
+// UPDATE USER
+export const updateUserById = (data: any, result: any) => {
+  try {
+    console.log("updated!");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// DELETE SINGLE USER
+export const deleteSingleUser = (id: string, result: any) => {
+  try {
+    DBConnection.query(
+      "DELETE FROM users WHERE id = ?",
+      [id],
+      (err, results) => {
+        if (err) {
+          result(err, null);
+        } else {
+          if (result.affectedRows) {
+            // IF THE USER DELETED
+            result(null, results);
+          } else {
+            // IF THE USER NOT DELETED
+            result(null, 204);
+          }
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};

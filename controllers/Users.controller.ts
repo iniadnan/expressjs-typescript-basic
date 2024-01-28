@@ -1,5 +1,11 @@
 import express, { Request, Response } from "express";
-import { getAllUser, getSingleUser, insertUser } from "../models/Users.model";
+import {
+  getAllUser,
+  getSingleUser,
+  insertUser,
+  updateUserById,
+  deleteSingleUser,
+} from "../models/Users.model";
 import { IShowUsers } from "../types";
 
 // GET ALL USER
@@ -56,7 +62,13 @@ export const createUser = (req: Request, res: Response) => {
 // UPDATE USER
 export const updateUser = (req: Request, res: Response) => {
   try {
-    return res.status(200).send("UPDATE USER");
+    updateUserById("hello", (err: any, results: any) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.status(200).send("OK");
+      }
+    });
   } catch (Error) {
     console.log(Error);
   }
@@ -65,7 +77,17 @@ export const updateUser = (req: Request, res: Response) => {
 // DELETE SINGLE USER
 export const deleteOneUser = (req: Request, res: Response) => {
   try {
-    return res.status(200).send("DELETE SINGLE USER");
+    deleteSingleUser(req.params.id, (err: any, results: any) => {
+      if (err) {
+        res.send(err);
+      } else {
+        if (results === 204) {
+          res.status(200).send("User not deleted!");
+        } else {
+          res.status(200).send("User deleted!");
+        }
+      }
+    });
   } catch (Error) {
     console.log(Error);
   }
