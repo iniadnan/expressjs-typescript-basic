@@ -25,7 +25,8 @@ export const showAllUser = (req: Request, res: Response) => {
 // GET SINGLE USER
 export const showSingleUser = (req: Request, res: Response) => {
   try {
-    getSingleUser(req.params.email, (err: any, results: any) => {
+    const email = req.params.email.trim().toLowerCase();
+    getSingleUser(email, (err: any, results: any) => {
       if (err) {
         res.send(err);
       } else {
