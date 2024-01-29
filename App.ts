@@ -1,4 +1,5 @@
 import express from "express";
+import ArticlesRoute from "./routes/Articles.route";
 import UsersRoute from "./routes/Users.route";
 
 const APP = express();
@@ -10,6 +11,8 @@ APP.use(express.json());
 // MIDDLEWARE BODY PARSER
 APP.use(express.urlencoded({ extended: false }));
 
+// API ARTICLES
+APP.use("/api/articles", ArticlesRoute);
 // API USERS
 APP.use("/api/users", UsersRoute);
 
