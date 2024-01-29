@@ -1,5 +1,6 @@
 import DBConnection from "../configs/Connnection";
 import { generateRandomStringNumber } from "../helpers/randomString";
+import { generateToken } from "../configs/Jwt";
 
 // GET ALL USERS
 export const getAllUser = (result: any) => {
@@ -92,6 +93,33 @@ export const deleteSingleUser = (id: string, result: any) => {
           } else {
             // IF THE USER NOT DELETED
             result(null, 204);
+          }
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// CHECK LOGIN USER
+export const checkLoginUser = (data: any, result: any) => {
+  try {
+    const { email, password } = data;
+
+    DBConnection.query(
+      "SELECT email, name, created_at FROM users WHERE email = ? AND password = ?",
+      [email, password],
+      (err, results) => {
+        if (err) {
+          result(err, null);
+        } else {
+          if (Array.isArray(results) && results.length > 0) {
+            const userId = generateRandomStringNumber(30);
+            const token = generateToken(userId);
+            result(null, token);
+          } else {
+            result(null, "Invalid username or password");
           }
         }
       }

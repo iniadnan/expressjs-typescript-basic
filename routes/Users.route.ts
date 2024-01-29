@@ -26,7 +26,7 @@ UsersRoute.put("/update", updateUser);
 // DELETE: DELETE SINGLE USER [http://localhost:3000/api/users/single/1234]
 UsersRoute.delete("/single/:id", deleteOneUser);
 
-// AUTH: LOGIN
+// AUTH: LOGIN [http://localhost:3000/api/users/login]
 UsersRoute.post("/login", loginUser);
 
 export default UsersRoute;

@@ -5,6 +5,7 @@ import {
   insertUser,
   updateUserById,
   deleteSingleUser,
+  checkLoginUser,
 } from "../models/Users.model";
 
 // GET ALL USER
@@ -23,7 +24,7 @@ export const showAllUser = (req: Request, res: Response) => {
 };
 
 // GET SINGLE USER
-export const showSingleUser = (req: Request, res: Response) => {
+export const showSingleUser = (req: Request, res: Response) => {      
   try {
     const email = req.params.email.trim().toLowerCase();
     getSingleUser(email, (err: any, results: any) => {
@@ -100,7 +101,17 @@ export const deleteOneUser = (req: Request, res: Response) => {
 // AUTH: LOGIN USER
 export const loginUser = (req: Request, res: Response) => {
   try {
-    return res.status(200).send("LOGIN USER");
+    const data = {
+      email: req.body.email.trim().toLowerCase(),
+      password: req.body.password.trim(),
+    };
+    checkLoginUser(data, (err: any, results: any) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.status(200).json(results);
+      }
+    });
   } catch (Error) {
     console.log(Error);
   }
