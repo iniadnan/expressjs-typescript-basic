@@ -1,6 +1,6 @@
 import { sign, verify } from "jsonwebtoken";
 
-const secretKey = "your_secret_key"; // Replace with your own secret key
+const secretKey = "your-secret-key"; // Replace with your own secret key
 
 export const generateToken = (userId: string): string => {
   return sign({ userId }, secretKey, { expiresIn: "1h" });

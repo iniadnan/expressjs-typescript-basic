@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
+import { verifyToken } from "../configs/Jwt";
 
 // Extend the Express Request type
 interface AuthenticatedRequest extends Request {
@@ -18,9 +18,14 @@ export const authMiddleware = (
   }
 
   try {
-    const decoded = jwt.verify(token, "your-secret-key");
-    req.user = decoded; // Attach user information to the request
-    next();
+    const tokenReplaceBearer = token.replace("Bearer ", "");
+    const decoded = verifyToken(tokenReplaceBearer);
+    if (!decoded) {
+      return res.status(401).json({ message: "Invalid token" });
+    } else {
+      req.user = decoded; // Attach user information to the request
+      next();
+    }
   } catch (error) {
     console.error(error);
     res.status(401).json({ message: "Invalid token" });
